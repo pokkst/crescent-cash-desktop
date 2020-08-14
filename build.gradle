@@ -16,7 +16,7 @@ task compileApp(type: Jar) {
 }
 
 group 'cash.crescent'
-version '1.13.8'
+version '1.14'
 
 sourceCompatibility = 1.11
 
