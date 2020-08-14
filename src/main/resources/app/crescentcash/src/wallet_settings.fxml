@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" style="-fx-background-color: #22cc76;" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.WalletSettingsController">
+    <children>
+        <HBox fx:id="innerWindow2" alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" spacing="20.0" style="-fx-background-color: #22cc76;" translateX="-5.0" translateY="-5.0">
+            <children>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#closeClicked" styleClass="btn" stylesheets="@wallet.css" text="Close" textFill="#263238" translateX="-25.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            </children>
+         <StackPane.margin>
+            <Insets left="25.0" right="25.0" />
+         </StackPane.margin>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+        </HBox>
+      <VBox fx:id="innerWindow" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="525.0" style="-fx-background-color: #22cc76;" translateY="-35.0">
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+         <children>
+            <Label text="Recovery seed" textFill="WHITE" translateY="-15.0">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="walletRecoverySeed" editable="false" prefHeight="75.0" prefWidth="533.0" style="-fx-text-fill: #fff; -fx-control-inner-background: #1CA560; -fx-background-color: #1CA560;" stylesheets="@wallet.css" wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+         </children>
+      </VBox>
+    </children>
+</StackPane>

@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile="/Users/mark/Documents/Git/crescentcash/app/libs/bitcoinj-core-0.15.2-bundled.jar" -DgroupId="org.bitcoincashj" -DartifactId="bitcoinj-core" -Dversion="0.15.2" -Dpackaging=jar -DgeneratePom=true

@@ -1,0 +1,109 @@
+.mnemonic-area *.text {
+    -fx-text-alignment: center;
+}
+
+.title-banner {
+    -fx-background-color: #b3fbc4;
+}
+
+.title-label {
+    -fx-background-color: darkseagreen;
+    -fx-text-fill: white;
+}
+
+.root-pane {
+    -fx-background-color: white;
+}
+
+.info-bar {
+    -fx-background-color: linear-gradient(to bottom, black, darkslategray);
+    -fx-padding: 10;
+}
+.info-bar > Label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.info-bar > .progress-bar > .bar {
+    -fx-padding: 8;
+}
+.info-bar > .progress-bar > .track {
+    -fx-opacity: 0.0;
+}
+
+
+.fat-button {
+    -fx-padding: 10 15 10 15;
+    -fx-min-width: 100;
+    -fx-base: whitesmoke;
+}
+
+.fat-button:default {
+    -fx-base: orange;
+    -fx-text-fill: white;
+}
+
+.fat-button:cancel {
+    -fx-background-color: lightgray, white;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3;
+    -fx-text-fill: black;
+}
+
+.fat-button:cancel:hover {
+    -fx-base: white;
+    -fx-background-insets: -1, 0, 1, 2;
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 3;
+    -fx-text-fill: black;
+}
+
+.btn {
+  -fx-text-fill: #111;
+  -fx-background-color: #fff;
+  -fx-padding: 6px 12px 6px 12px;
+  -fx-text-decoration: none;
+}
+
+.btn:hover {
+  -fx-text-fill: #fff;
+  -fx-background-color: #151515;
+  -fx-text-decoration: none;
+}
+
+.btnOnWhite {
+  -fx-text-fill: #111;
+  -fx-background-color: #22cc76;
+  -fx-padding: 6px 12px 6px 12px;
+  -fx-text-decoration: none;
+}
+
+.btnOnWhite:hover {
+  -fx-text-fill: #111;
+  -fx-background-color: #1CA560;
+  -fx-text-decoration: none;
+}
+
+.btnpop {
+  -fx-text-fill: #000;
+  -fx-background-color: #fff;
+  -fx-padding: 6px 12px 6px 12px;
+  -fx-text-decoration: none;
+}
+
+.btnpop:hover {
+  -fx-text-fill: #fff;
+  -fx-background-color: #242424;
+  -fx-text-decoration: none;
+}
+
+.tx_grid_pane > .button {
+        -fx-text-fill: #111;
+        -fx-background-color: #22cc76;
+        -fx-text-decoration: none;
+}
+
+.tx_grid_pane > .button:hover {
+        -fx-text-fill: #111;
+        -fx-background-color: #1CA560;
+        -fx-text-decoration: none;
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import app.crescentcash.src.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.SendSlpTokenController">
+    <children>
+        <VBox fx:id="sendTabVbox" prefHeight="385.0" prefWidth="850.0" style="-fx-background-color: #fff;">
+            <children>
+                <Label fx:id="title" contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Send Token" textFill="#000">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Label>
+                <HBox prefHeight="25.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="29.0" prefWidth="90.0" text="To">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextFieldSendSlp fx:id="toAddress" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="668.0" promptText="SLP address" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox fx:id="sendHBox" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0">
+                    <children>
+                        <Label prefHeight="29.0" prefWidth="90.0" text="Amount">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="toAmount" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" promptText="1.00" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </TextField>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setMaxCoins" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Max">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </Button>
+                        <ComboBox fx:id="sendType" onAction="#setSendType" prefHeight="27.0" prefWidth="100.0" styleClass="combo-box" stylesheets="@../../../css/combo_box.css" />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+         <children>
+              <Button fx:id="clearBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearSendFields" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Clear">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+              <Button fx:id="sendBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#send" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Send" />
+         </children>
+         <StackPane.margin>
+            <Insets bottom="75.0" left="-275.0" />
+         </StackPane.margin>
+      </HBox>
+        <HBox alignment="BOTTOM_RIGHT" layoutX="469.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0" StackPane.alignment="BOTTOM_RIGHT">
+            <children>
+                <Button mnemonicParsing="false" onAction="#close" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Close" textFill="#263238" translateX="-5.0" translateY="-5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </HBox>
+    </children>
+</StackPane>

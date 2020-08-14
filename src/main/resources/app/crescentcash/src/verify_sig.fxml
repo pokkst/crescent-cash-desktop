@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.VerifySignatureController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Verify Signature" textFill="#000">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+                </Label>
+                <TextField fx:id="messageToVerify" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="433.0" promptText="Message" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                   <VBox.margin>
+                      <Insets bottom="5.0" />
+                   </VBox.margin></TextField>
+            <TextField fx:id="addressToVerify" layoutX="35.0" layoutY="81.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="433.0" promptText="Address" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </TextField>
+                <TextField fx:id="signatureToVerify" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="433.0" promptText="Signature" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></TextField>
+                <Button alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#verifyMessage" prefHeight="29.0" prefWidth="141.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Verify">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Button>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+        <HBox alignment="BOTTOM_RIGHT" layoutX="469.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0" StackPane.alignment="BOTTOM_RIGHT">
+            <children>
+                <Button fx:id="close" mnemonicParsing="false" onAction="#close" styleClass="btn" stylesheets="@wallet.css" text="Close" textFill="#263238" translateX="-5.0" translateY="-5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </HBox>
+    </children>
+</StackPane>

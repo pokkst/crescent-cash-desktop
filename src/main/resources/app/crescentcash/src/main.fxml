@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?scenebuilder-classpath-element ../../../../target/classes?>
+<?scenebuilder-classpath-element ../../../../../core/target/bitcoinj-0.12-SNAPSHOT.jar?>
+<?import app.crescentcash.src.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="window" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" style="-fx-background-color: white;" styleClass="root-pane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.ui.UIController">
+  <children>
+      <Pane fx:id="restorePane" prefHeight="475.0" prefWidth="850.0" style="-fx-background-color: #fff;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="225.0" layoutY="72.0" prefHeight="50.0" prefWidth="400.0" text="Restore Wallet">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Label>
+            <TextFieldValidatorHashtag fx:id="handleRestoreField" focusTraversable="false" layoutX="300.0" layoutY="160.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="250.0" promptText="Cash Account" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+            <TextField fx:id="newSeed" focusTraversable="false" layoutX="300.0" layoutY="205.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Recovery seed" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+             <Button fx:id="recoverBtn" layoutX="375.0" layoutY="266.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#recoverWallet" prefWidth="100.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Restore" />
+         </children>
+      </Pane>
+      <Pane fx:id="createWalletPane" prefHeight="475.0" prefWidth="850.0" style="-fx-background-color: #fff;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="225.0" layoutY="82.0" prefHeight="50.0" prefWidth="400.0" text="Create Wallet">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Label>
+            <TextFieldValidator fx:id="usernameCreate" focusTraversable="false" layoutX="300.0" layoutY="161.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="250.0" promptText="Cash Account" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+            <Button fx:id="createWalletBtn" layoutX="375.0" layoutY="249.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registerWallet" prefWidth="100.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Create" />
+         </children>
+      </Pane>
+      <Pane fx:id="firstStartPane" prefHeight="475.0" prefWidth="850.0" style="-fx-background-color: #fff;" visible="false">
+         <children>
+            <Label alignment="CENTER" layoutX="225.0" layoutY="82.0" prefHeight="50.0" prefWidth="400.0" text="Welcome to Crescent">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="createBtn" layoutX="337.5" layoutY="171.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#displayNewWallet" prefHeight="25.0" prefWidth="175.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Create Wallet" />
+            <Button fx:id="restoreBtn" layoutX="337.5" layoutY="226.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#displayRestorePane" prefHeight="25.0" prefWidth="175.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Restore Wallet" />
+         </children>
+      </Pane>
+      <TabPane fx:id="tabPane" layoutY="10.0" prefHeight="475.0" prefWidth="850.0" stylesheets="@../../../css/tab_pane.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="historyTab" closable="false" text="History">
+               <content>
+                  <ScrollPane fx:id="historyBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="850.0" stylesheets="@../../../css/scroll_pane.css" vbarPolicy="ALWAYS">
+                    <content>
+                      <AnchorPane minWidth="0.0" prefWidth="825.0">
+                           <children>
+                              <GridPane fx:id="txGrid" prefWidth="825.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="5" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="5" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="8.0" prefWidth="100.0" />
+                                </columnConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </content>
+            </Tab>
+            <Tab fx:id="sendTab" closable="false" text="Send">
+               <content>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                     <children>
+                        <VBox fx:id="sendTabVbox" prefHeight="385.0" prefWidth="850.0">
+                           <children>
+                              <HBox prefHeight="25.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="29.0" prefWidth="90.0" text="To">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextFieldSend fx:id="toAddress" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="668.0" promptText="Cash Account or a BCH address" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox fx:id="opReturnBox" layoutX="35.0" layoutY="35.0" prefHeight="25.0" prefWidth="200.0">
+                                 <children>
+                                    <Label maxWidth="-Infinity" prefHeight="29.0" prefWidth="150.0" text="OP_RETURN">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextFieldOpReturn fx:id="opReturnText" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="600.0" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="29.0" prefWidth="90.0" text="Amount">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="toAmount" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" promptText="1.00" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="maxBtn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setMaxCoins" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Max">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <ComboBox fx:id="sendType" onAction="#setSendType" prefHeight="27.0" prefWidth="100.0" styleClass="combo-box" stylesheets="@../../../css/combo_box.css" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                           </padding>
+                        </VBox>
+                        <Button fx:id="clearBtn" layoutX="200.0" layoutY="150.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearSendFields" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Clear" />
+                        <Button fx:id="sendBtn" layoutX="290.0" layoutY="150.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#send" prefWidth="75.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Send" />
+                        <Button fx:id="clearUtxosBtn" layoutX="68.0" layoutY="150.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearUtxos" prefHeight="29.0" prefWidth="117.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Clear UTXOs" visible="false" />
+                     </children>
+                  </Pane>
+               </content></Tab>
+            <Tab fx:id="receiveTab" closable="false" text="Receive">
+               <content>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                     <children>
+                         <TabPane fx:id="innerReceiveTabPane" layoutY="10.0" prefHeight="475.0" prefWidth="850.0" stylesheets="@../../../css/tab_pane.css" tabClosingPolicy="UNAVAILABLE">
+                             <tabs>
+                                 <Tab fx:id="receiveBCHTab" closable="false" text="BCH">
+                                     <content>
+                                         <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                                             <children>
+                                                 <TextField fx:id="cashAcctText" alignment="CENTER" editable="false" layoutX="275.0" layoutY="24.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" style="-fx-text-fill: #111; -fx-control-inner-background: #fff; -fx-background-color: #fff;" />
+                                                 <ImageView fx:id="qrCode" fitHeight="150.0" fitWidth="150.0" layoutX="350.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
+                                                 <Button fx:id="togglePaymentCodeBtn" layoutX="325.0" layoutY="225.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#togglePaymentCode" prefWidth="200.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Show BCH Address" />
+                                                 <TextField fx:id="newReceiveAddress" editable="false" layoutX="225.0" layoutY="275.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" style="-fx-text-fill: #111; -fx-control-inner-background: #fff; -fx-background-color: #fff;" />
+                                             </children>
+                                         </Pane>
+                                     </content>
+                                 </Tab>
+                                 <Tab fx:id="receiveSLPTab" closable="false" text="SLP">
+                                     <content>
+                                         <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                                             <children>
+                                                 <ImageView fx:id="qrCodeSlp" fitHeight="200.0" fitWidth="200.0" layoutX="325.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                                 <Button fx:id="toggleAddrBtn" layoutX="325.0" layoutY="225.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleAddress" prefWidth="200.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Show BCH Address" />
+                                                 <TextField fx:id="newReceiveAddressSlp" editable="false" layoutX="225.0" layoutY="275.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="400.0" style="-fx-text-fill: #111; -fx-control-inner-background: #fff; -fx-background-color: #fff;" />
+                                             </children>
+                                         </Pane>
+                                     </content>
+                                 </Tab>
+                             </tabs>
+                         </TabPane>
+                        </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab fx:id="slpTokensTab" closable="false" text="SLP Tokens">
+                <content>
+                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                        <children>
+                            <ListView fx:id="slpTokens" layoutY="-5.0" onMouseClicked="#sendToken" prefHeight="366.0" prefWidth="850.0" stylesheets="@listview.css" translateY="5.0" />
+                        </children>
+                    </Pane>
+                </content>
+            </Tab>
+            <Tab fx:id="settingsTab" closable="false" text="Settings">
+               <content>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                     <children>
+                        <VBox prefHeight="367.0" prefWidth="792.0">
+                           <children>
+                              <Button fx:id="btnDisplaySeed" mnemonicParsing="false" onAction="#displayRecoverySeed" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Display recovery seed">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin></Button>
+                              <Label text="Do not show anyone this seed! Anyone who has access to this seed can spend your coins!">
+                                 <padding>
+                                    <Insets bottom="15.0" />
+                                 </padding></Label>
+                              <Label text="Extended public key">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
+                              <TextField editable="false" prefHeight="25.0" prefWidth="300.0" style="-fx-text-fill: #111; -fx-control-inner-background: #fff; -fx-background-color: #fff;" text="xpub" fx:id="xpubLabel">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin></TextField>
+                              <Label layoutX="35.0" layoutY="96.0" text="Appearance">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="25.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="200.0" text="Display units" />
+                                    <ComboBox fx:id="displayUnits" onAction="#setDisplayUnits" prefHeight="25.0" prefWidth="150.0" styleClass="combo-box" stylesheets="@../../../css/combo_box.css" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="35.0" layoutY="153.0" prefHeight="25.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="200.0" text="Fiat" />
+                                    <ComboBox fx:id="fiatType" onAction="#setFiatType" prefHeight="25.0" prefWidth="150.0" styleClass="combo-box" stylesheets="@../../../css/combo_box.css" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label layoutX="35.0" layoutY="153.0" text="Privacy and Security">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <!--<HBox prefHeight="25.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="325.0" text="Encrypt wallet" />
+                                    <CheckBox fx:id="encryptionCheckbox" onAction="#setEncryption" prefHeight="25.0" prefWidth="25.0" />
+                                 </children>
+                              </HBox>-->
+                              <HBox layoutX="35.0" layoutY="249.0" prefHeight="25.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="325.0" text="Use Tor" />
+                                    <CheckBox fx:id="torCheckbox" onAction="#setTor" prefHeight="25.0" prefWidth="25.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab fx:id="toolsTab" closable="false" text="Advanced">
+                <content>
+                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="850.0">
+                        <children>
+                            <VBox prefHeight="385.0" prefWidth="850.0">
+                                <children>
+                              <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="800.0" spacing="15.0">
+                                 <children>
+                                    <VBox fillWidth="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="405.0">
+                                       <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showKeys" prefHeight="30.0" prefWidth="170.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="View current addresses">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Label prefHeight="32.0" prefWidth="393.0" text="View keys, sign messages, import new ones, and more" textFill="#000" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox fillWidth="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="405.0">
+                                       <children>
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showUtxos" prefHeight="30.0" prefWidth="170.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="View UTXOs">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Label prefHeight="25.0" text="View, and select UTXOs here to spend from" textFill="#000" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox prefHeight="25.0" prefWidth="100.0" />
+                              <Label contentDisplay="CENTER" layoutX="35.0" layoutY="121.0" prefHeight="36.0" prefWidth="200.0" text="Transactions" textFill="#000">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="25.0">
+                                 <children>
+                                          <HBox prefHeight="25.0">
+                                              <children>
+                                                  <Label prefHeight="25.0" prefWidth="325.0" text="Add custom OP_RETURNs" />
+                                                  <CheckBox fx:id="opReturnCheckbox" onAction="#setOpReturn" prefHeight="25.0" prefWidth="25.0" />
+                                              </children>
+                                          </HBox>
+                                    <HBox prefHeight="25.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="325.0" text="Allow sending to legacy P2SH addresses" />
+                                          <CheckBox fx:id="allowLegacyP2SHCheckbox" onAction="#setLegacyP2SH" prefHeight="25.0" prefWidth="25.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </HBox>
+                                    <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Network Node" textFill="#000">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                                    </Label>
+                                <TextFieldValidatorIP fx:id="networkNodeText" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="170.0" promptText="192.168.1.1" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                </TextFieldValidatorIP>
+                              <Label contentDisplay="CENTER" layoutX="35.0" layoutY="69.0" prefHeight="36.0" prefWidth="132.0" text="(Requires app restart)" textFill="#000" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="99.0">
+                                       <children>
+                                              <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Verify Signature" textAlignment="CENTER" textFill="#000">
+                                                 <font>
+                                                    <Font name="System Bold" size="16.0" />
+                                                 </font>
+                                                 <padding>
+                                                    <Insets bottom="5.0" />
+                                                 </padding>
+                                              </Label>
+                                                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#displayVerifySig" prefHeight="30.0" prefWidth="170.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Verify a signature">
+                                                    <VBox.margin>
+                                                        <Insets bottom="5.0" />
+                                                    </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0">
+                                       <children>
+                                                <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Sweep Wallet" textAlignment="CENTER" textFill="#000">
+                                                    <font>
+                                                        <Font name="System Bold" size="18.0" />
+                                                    </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                                </Label>
+                                          <VBox fx:id="sweepWalletVbox" prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <HBox prefHeight="30.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TextField fx:id="privateKeyToSweep" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="322.0" promptText="Private key" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                                                         <HBox.margin>
+                                                            <Insets right="10.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sweepPaperWallet" prefHeight="30.0" prefWidth="170.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Sweep paper wallet" />
+                                                   </children>
+                                                </HBox>
+                                                <PasswordField fx:id="bip38PasswordText" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="322.0" promptText="Password" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                                </children>
+                                <padding>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                </padding>
+                            </VBox>
+                        </children>
+                    </Pane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label fx:id="connectionStatus" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="625.0" layoutY="410.0" prefHeight="12.0" prefWidth="200.0" text="Connecting..." textFill="#000000">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <VBox fx:id="balanceLabel" layoutX="5.0" layoutY="410.0" maxHeight="-Infinity" prefHeight="62.0" prefWidth="513.0">
+         <children>
+              <Label fx:id="balance" text="BCH 0.00" textFill="#000000" underline="false">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="balanceSlp" layoutX="10.0" layoutY="10.0" text="SLP 0.00" textFill="#000000" underline="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children></VBox>
+  </children>
+</AnchorPane>

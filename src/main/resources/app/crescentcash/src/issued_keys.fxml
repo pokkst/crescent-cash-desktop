@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.IssuedKeysController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="Wallet Keys" textAlignment="CENTER" textFill="#000">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+                </Label>
+            <VBox fx:id="keyTextsVbox">
+               <children>
+                      <TextField fx:id="privKeyField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="433.0" promptText="Private key" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField fx:id="bip38ImportPasswordText" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="433.0" promptText="Password" style="-fx-text-fill: #111; -fx-control-inner-background: #e0e0e0; -fx-background-color: #e0e0e0;" />
+               </children>
+            </VBox>
+                <Label prefHeight="41.0" prefWidth="553.0" text="Keys imported here will not be used for spending. This is primarily for using an address you own for signing, in the event you need to" textFill="#000" wrapText="true">
+                    <font>
+                        <Font name="System" size="12.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#importPrivateKey" prefHeight="29.0" prefWidth="141.0" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Import private key" />
+                <ListView fx:id="keys" onMouseClicked="#selectKey" prefHeight="206.0" prefWidth="750.0" stylesheets="@listview.css" translateY="5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+        <HBox alignment="BOTTOM_RIGHT" layoutX="469.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0" StackPane.alignment="BOTTOM_RIGHT">
+            <children>
+                <Button fx:id="close" mnemonicParsing="false" onAction="#close" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Close" textFill="#263238" translateX="-5.0" translateY="-5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </HBox>
+    </children>
+</StackPane>

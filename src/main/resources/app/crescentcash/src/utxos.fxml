@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" stylesheets="@wallet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.crescentcash.src.UtxoController">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #fff;">
+            <children>
+                <Label contentDisplay="CENTER" prefHeight="36.0" prefWidth="200.0" text="UTXOs" textAlignment="CENTER" textFill="#000">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                    <rotationAxis>
+                        <Point3D />
+                    </rotationAxis>
+                </Label>
+                <ListView fx:id="utxos" onMouseClicked="#selectKey" prefHeight="325.0" prefWidth="750.0" stylesheets="@listview.css" translateY="5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+        <HBox alignment="BOTTOM_RIGHT" layoutX="469.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="17.0" StackPane.alignment="BOTTOM_RIGHT">
+            <children>
+                <Button mnemonicParsing="false" onAction="#openSend" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Send" textFill="#263238" translateX="-5.0" translateY="-5.0" />
+                <Button mnemonicParsing="false" onAction="#close" styleClass="btnOnWhite" stylesheets="@wallet.css" text="Close" textFill="#263238" translateX="-5.0" translateY="-5.0" />
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </HBox>
+    </children>
+</StackPane>
