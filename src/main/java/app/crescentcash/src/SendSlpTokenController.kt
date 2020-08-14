@@ -147,23 +147,32 @@ class SendSlpTokenController {
                 if(toAddress?.text.toString().startsWith("http")) {
                     this.processSlpBIP70(toAddress?.text.toString())
                 } else {
-                    try {
-                        val tx = WalletHelper.slpWalletKit?.createSlpTransaction(address, tokenId, java.lang.Double.parseDouble(toAmount?.text), null)
-                        WalletHelper.slpWalletKit?.broadcastSlpTransaction(tx)
-                        Main.INSTANCE.uiHelper.refresh()
-                        this.clear()
-                        this.close()
-                    } catch (e: InsufficientMoneyException) {
-                        e.message?.let { this.throwSendError(it) }
-                    } catch (e: Wallet.CouldNotAdjustDownwards) {
-                        this.throwSendError("Not enough BCH for fee!")
-                    } catch (e: Wallet.ExceededMaxTransactionSize) {
-                        this.throwSendError("Transaction is too large!")
-                    } catch (e: NullPointerException) {
-                        this.throwSendError("Cash Account not found.")
-                    } catch (e: IllegalArgumentException) {
-                        e.message?.let { this.throwSendError(it) }
-                    } catch (e: AddressFormatException) {
+                    if(Address.isValidSlpAddress(WalletHelper.parameters, address)) {
+                        try {
+                            val tx = WalletHelper.slpWalletKit?.createSlpTransaction(
+                                address,
+                                tokenId,
+                                java.lang.Double.parseDouble(toAmount?.text),
+                                null
+                            )
+                            WalletHelper.slpWalletKit?.broadcastSlpTransaction(tx)
+                            Main.INSTANCE.uiHelper.refresh()
+                            this.clear()
+                            this.close()
+                        } catch (e: InsufficientMoneyException) {
+                            e.message?.let { this.throwSendError(it) }
+                        } catch (e: Wallet.CouldNotAdjustDownwards) {
+                            this.throwSendError("Not enough BCH for fee!")
+                        } catch (e: Wallet.ExceededMaxTransactionSize) {
+                            this.throwSendError("Transaction is too large!")
+                        } catch (e: NullPointerException) {
+                            this.throwSendError("Cash Account not found.")
+                        } catch (e: IllegalArgumentException) {
+                            e.message?.let { this.throwSendError(it) }
+                        } catch (e: AddressFormatException) {
+                            this.throwSendError("Invalid address!")
+                        }
+                    } else {
                         this.throwSendError("Invalid address!")
                     }
                 }
