@@ -442,18 +442,16 @@ class WalletHelper {
 
                     if(address != null) {
                         if (Address.isValidPaymentCode(address)) {
-                            println("Valid BIP47 Payment Code from Cash Account")
-                            val paymentChannel: BIP47Channel? = walletKit?.getBip47MetaForPaymentCode(address)
-
-                            if (paymentChannel == null) {
-                                //If payment channel is null, we can assume notification tx has not been sent. It's possible one has been sent in the past, but the payment channel is null because the user deleted the .bip47 file, but that's a non-issue.
-                                println("Constructing notification tx...")
-                                val notification = walletKit?.makeNotificationTransaction(address, true)
-                                walletKit?.broadcastTransaction(notification?.tx)
-                                walletKit?.putPaymenCodeStatusSent(address, notification?.tx)
-                                this@WalletHelper.attemptBip47Payment(amount, address)
-                            } else {
-                                this@WalletHelper.attemptBip47Payment(amount, address)
+                            val canSend = walletKit?.canSendToPaymentCode(address)
+                            if(canSend != null) {
+                                if(canSend) {
+                                    this@WalletHelper.attemptBip47Payment(amount, address)
+                                } else {
+                                    val notification = walletKit?.makeNotificationTransaction(address, true)
+                                    walletKit?.broadcastTransaction(notification?.tx)
+                                    walletKit?.putPaymenCodeStatusSent(address, notification?.tx)
+                                    this@WalletHelper.attemptBip47Payment(amount, address)
+                                }
                             }
                         } else if (Address.isValidCashAddr(parameters, address) || Address.isValidLegacyAddress(parameters, address) && (!LegacyAddress.fromBase58(parameters, address).p2sh || allowLegacyP2SH)) {
                             this@WalletHelper.finalizeTransaction(amount, address)
@@ -463,18 +461,16 @@ class WalletHelper {
                     }
                 } else {
                     if (Address.isValidPaymentCode(toAddress)) {
-                        println("Valid BIP47 Payment Code from Address")
-                        val paymentChannel: BIP47Channel? = walletKit?.getBip47MetaForPaymentCode(toAddress)
-
-                        if(paymentChannel == null) {
-                            //If payment channel is null, we can assume notification tx has not been sent. It's possible one has been sent in the past, but the payment channel is null because the user deleted the .bip47 file, but that's a non-issue.
-                            println("Constructing notification tx...")
-                            val notification = walletKit?.makeNotificationTransaction(toAddress, true)
-                            walletKit?.broadcastTransaction(notification?.tx)
-                            walletKit?.putPaymenCodeStatusSent(toAddress, notification?.tx)
-                            this@WalletHelper.attemptBip47Payment(amount, toAddress)
-                        } else {
-                            this@WalletHelper.attemptBip47Payment(amount, toAddress)
+                        val canSend = walletKit?.canSendToPaymentCode(toAddress)
+                        if(canSend != null) {
+                            if(canSend) {
+                                this@WalletHelper.attemptBip47Payment(amount, toAddress)
+                            } else {
+                                val notification = walletKit?.makeNotificationTransaction(toAddress, true)
+                                walletKit?.broadcastTransaction(notification?.tx)
+                                walletKit?.putPaymenCodeStatusSent(toAddress, notification?.tx)
+                                this@WalletHelper.attemptBip47Payment(amount, toAddress)
+                            }
                         }
                     } else if(Address.isValidCashAddr(parameters, toAddress) || Address.isValidLegacyAddress(parameters, toAddress) && (!LegacyAddress.fromBase58(parameters, toAddress).p2sh || allowLegacyP2SH)) {
                         this@WalletHelper.finalizeTransaction(amount, toAddress)
@@ -489,11 +485,13 @@ class WalletHelper {
         var depositAddress: String? = null
         if (paymentChannel != null) {
             if(paymentChannel.isNotificationTransactionSent) {
-                depositAddress = walletKit?.getCurrentOutgoingAddress(paymentChannel).toString()
-                println("Received user's deposit address $depositAddress")
-                paymentChannel.incrementOutgoingIndex()
-                walletKit?.saveBip47MetaData()
-                this.finalizeTransaction(amount, depositAddress)
+                depositAddress = walletKit?.getCurrentOutgoingAddress(paymentChannel)
+                if(depositAddress != null) {
+                    println("Received user's deposit address $depositAddress")
+                    paymentChannel.incrementOutgoingIndex()
+                    walletKit?.saveBip47MetaData()
+                    this.finalizeTransaction(amount, depositAddress)
+                }
             } else {
                 val notification = walletKit?.makeNotificationTransaction(paymentCode, true)
                 walletKit?.broadcastTransaction(notification?.tx)
