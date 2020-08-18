@@ -318,7 +318,7 @@ class SendSlpTokenController {
 
     private fun sendCoins(amount: String, toAddress: String) {
         if (toAddress.contains("#") || Address.isValidCashAddr(WalletHelper.parameters, toAddress) || Address.isValidLegacyAddress(
-                WalletHelper.parameters, toAddress) && (!LegacyAddress.fromBase58(MainNetParams.get(), toAddress).p2sh || WalletHelper.allowLegacyP2SH)) {
+                WalletHelper.parameters, toAddress) && (!AddressFactory.create().fromBase58(MainNetParams.get(), toAddress).p2sh || WalletHelper.allowLegacyP2SH)) {
             object : Thread() {
                 override fun run() {
                     val recipientAddress = toAddress

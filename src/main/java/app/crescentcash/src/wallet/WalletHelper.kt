@@ -453,7 +453,7 @@ class WalletHelper {
                                     this@WalletHelper.attemptBip47Payment(amount, address)
                                 }
                             }
-                        } else if (Address.isValidCashAddr(parameters, address) || Address.isValidLegacyAddress(parameters, address) && (!LegacyAddress.fromBase58(parameters, address).p2sh || allowLegacyP2SH)) {
+                        } else if (Address.isValidCashAddr(parameters, address) || Address.isValidLegacyAddress(parameters, address) && (!AddressFactory.create().fromBase58(parameters, address).p2sh || allowLegacyP2SH)) {
                             this@WalletHelper.finalizeTransaction(amount, address)
                         }
                     } else {
@@ -472,7 +472,7 @@ class WalletHelper {
                                 this@WalletHelper.attemptBip47Payment(amount, toAddress)
                             }
                         }
-                    } else if(Address.isValidCashAddr(parameters, toAddress) || Address.isValidLegacyAddress(parameters, toAddress) && (!LegacyAddress.fromBase58(parameters, toAddress).p2sh || allowLegacyP2SH)) {
+                    } else if(Address.isValidCashAddr(parameters, toAddress) || Address.isValidLegacyAddress(parameters, toAddress) && (!AddressFactory.create().fromBase58(parameters, toAddress).p2sh || allowLegacyP2SH)) {
                         this@WalletHelper.finalizeTransaction(amount, toAddress)
                     }
                 }
@@ -646,7 +646,7 @@ class WalletHelper {
         val addressObj = if(Address.isValidCashAddr(parameters, address))
             CashAddressFactory.create().getFromFormattedAddress(parameters, address)
         else
-            LegacyAddress.fromBase58(parameters, address)
+            AddressFactory.create().fromBase58(parameters, address)
 
         return wallet.isPubKeyHashMine(addressObj.hash)
     }
@@ -723,7 +723,7 @@ class WalletHelper {
             println(finalAddress)
             val signedAddress = ECKey.signedMessageToKey(message, signature).toAddress(MainNetParams.get()).toString()
             val addressLegacy = if (Address.isValidCashAddr(MainNetParams.get(), finalAddress)) {
-                LegacyAddress.fromCashAddress(MainNetParams.get(), finalAddress).toBase58()
+                AddressFactory.create().fromCashAddress(MainNetParams.get(), finalAddress).toBase58()
             } else {
                 finalAddress
             }

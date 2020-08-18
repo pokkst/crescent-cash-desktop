@@ -4,10 +4,7 @@ import app.crescentcash.src.Main
 import app.crescentcash.src.utils.GuiUtils
 import app.crescentcash.src.wallet.WalletHelper
 import com.victorlaerte.asynctask.AsyncTask
-import org.bitcoinj.core.Address
-import org.bitcoinj.core.CashAddress
-import org.bitcoinj.core.CashAddressFactory
-import org.bitcoinj.core.LegacyAddress
+import org.bitcoinj.core.*
 import org.bitcoinj.wallet.DeterministicSeed
 import org.bitcoinj.wallet.Wallet
 
@@ -53,7 +50,7 @@ class AsyncTaskVerifyWallet(private val tempWallet: Wallet, private val cashAcct
             } else {
                 val accountAddress: Address? = when {
                     Address.isValidCashAddr(WalletHelper.parameters, result) -> CashAddressFactory.create().getFromFormattedAddress(WalletHelper.parameters, result)
-                    Address.isValidLegacyAddress(WalletHelper.parameters, result) -> LegacyAddress.fromBase58(WalletHelper.parameters, result)
+                    Address.isValidLegacyAddress(WalletHelper.parameters, result) -> AddressFactory.create().fromBase58(WalletHelper.parameters, result)
                     else -> {
                         GuiUtils.informationalAlert("Crescent Cash", "No address found.")
                         null
